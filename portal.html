@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RCAS – Quantum AI Zone | Portal</title>
+<meta name="description" content="RCAS Quantum AI Zone – Professional Quantum Computing & AI Teaching Platform"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="portal.css"/>
+</head>
+<body>
+
+<!-- TOP TITLEBAR -->
+<div class="titlebar" id="titlebar">
+  <div class="tb-left">
+    <div class="tb-logo">
+      <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="5" fill="#0078d4"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none" transform="rotate(60 20 20)"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none" transform="rotate(120 20 20)"/></svg>
+      RCAS – Quantum AI Zone
+    </div>
+    <div class="tb-breadcrumb" id="tbBread">Dashboard</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><span id="userLabel">admin</span></div>
+    <div class="tb-clock" id="tbClock">12:01 PM</div>
+    <button class="tb-btn" onclick="logout()" title="Logout"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+    <div class="win-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">A</div>
+      <div>
+        <div class="user-name" id="userName">Administrator</div>
+        <div class="user-role" id="userRole">RCAS Admin</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-label">MAIN</div>
+      <a class="nav-item active" data-section="dashboard" onclick="nav(this,'dashboard')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard
+      </a>
+      <div class="nav-label">LEARN</div>
+      <a class="nav-item" data-section="beginner" onclick="nav(this,'beginner')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Beginner
+        <span class="badge green">New</span>
+      </a>
+      <a class="nav-item" data-section="intermediate" onclick="nav(this,'intermediate')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Intermediate
+        <span class="badge blue">8 Labs</span>
+      </a>
+      <a class="nav-item" data-section="advanced" onclick="nav(this,'advanced')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Advanced
+        <span class="badge purple">AI/ML</span>
+      </a>
+      <div class="nav-label">TOOLS</div>
+      <a class="nav-item" data-section="gates" onclick="nav(this,'gates')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M7 12h10M12 7v10"/></svg>Quantum Gates
+      </a>
+      <a class="nav-item" data-section="codelab" onclick="nav(this,'codelab')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Code Lab
+        <span class="badge orange">Run</span>
+      </a>
+      <div class="nav-label">EXPLORE</div>
+      <a class="nav-item" data-section="projects" onclick="nav(this,'projects')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Future Projects
+      </a>
+      <a class="nav-item" data-section="casestudies" onclick="nav(this,'casestudies')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Case Studies
+      </a>
+      <a class="nav-item" data-section="about" onclick="nav(this,'about')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>About
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div style="font-size:10px;color:#888;text-align:center;line-height:1.6">
+        © 2026 RCAS Quantum AI Zone<br/>
+        <a href="https://www.linkedin.com/in/profanjitraja/" target="_blank" style="color:#0078d4;text-decoration:none">Prof. R. Anjit Raja</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+
+    <!-- DASHBOARD -->
+    <section class="section active" id="sec-dashboard">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Welcome to RCAS Quantum AI Zone</h1>
+          <p class="page-sub">Your professional quantum computing &amp; AI learning platform — powered by cutting-edge science</p>
+        </div>
+        <div class="header-badge">
+          <svg width="16" height="16" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="5" fill="#0078d4"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none" transform="rotate(60 20 20)"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#0078d4" stroke-width="2.5" fill="none" transform="rotate(120 20 20)"/></svg>
+          Quantum Ready
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div class="stat-num">42</div><div class="stat-lbl">Total Lessons</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="stat-num">18</div><div class="stat-lbl">Hands-on Labs</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="stat-num">12</div><div class="stat-lbl">Future Projects</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="stat-num">100+</div><div class="stat-lbl">Active Users</div>
+        </div>
+      </div>
+
+      <!-- Learning Path -->
+      <div class="win-panel">
+        <div class="win-panel-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Quantum Learning Roadmap
+        </div>
+        <div class="roadmap">
+          <div class="rm-step done"><div class="rm-dot"></div><div class="rm-body"><strong>Stage 1: Quantum Fundamentals</strong><p>Qubits, superposition, entanglement, Bloch sphere, quantum measurement</p></div></div>
+          <div class="rm-step done"><div class="rm-dot"></div><div class="rm-body"><strong>Stage 2: Quantum Gates &amp; Circuits</strong><p>Pauli gates, Hadamard, CNOT, Toffoli, Bell states, circuit composition</p></div></div>
+          <div class="rm-step active"><div class="rm-dot"></div><div class="rm-body"><strong>Stage 3: Quantum Algorithms</strong><p>Deutsch-Jozsa, Grover's search, Shor's factoring, QPE, QFT</p></div></div>
+          <div class="rm-step"><div class="rm-dot"></div><div class="rm-body"><strong>Stage 4: Quantum Machine Learning</strong><p>VQE, QAOA, QNN, hybrid classical-quantum models</p></div></div>
+          <div class="rm-step"><div class="rm-dot"></div><div class="rm-body"><strong>Stage 5: Real-World Applications</strong><p>Quantum cryptography, drug discovery, finance, optimization</p></div></div>
+        </div>
+      </div>
+
+      <!-- Platform Cards -->
+      <div class="two-col">
+        <div class="win-panel">
+          <div class="win-panel-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Quick Access Labs</div>
+          <div class="quick-list">
+            <div class="quick-item" onclick="nav(document.querySelector('[data-section=codelab]'),'codelab')"><span class="qi-icon blue">⚛</span><span>Bell State Circuit</span><span class="qi-arrow">›</span></div>
+            <div class="quick-item" onclick="nav(document.querySelector('[data-section=codelab]'),'codelab')"><span class="qi-icon green">∿</span><span>Grover's Search Algorithm</span><span class="qi-arrow">›</span></div>
+            <div class="quick-item" onclick="nav(document.querySelector('[data-section=codelab]'),'codelab')"><span class="qi-icon purple">⊗</span><span>Quantum Fourier Transform</span><span class="qi-arrow">›</span></div>
+            <div class="quick-item" onclick="nav(document.querySelector('[data-section=codelab]'),'codelab')"><span class="qi-icon orange">⊕</span><span>VQE – Variational Eigensolver</span><span class="qi-arrow">›</span></div>
+          </div>
+        </div>
+        <div class="win-panel">
+          <div class="win-panel-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Platform Highlights</div>
+          <div class="highlight-list">
+            <div class="hl-item"><div class="hl-dot ibm"></div><strong>IBM Quantum</strong> – inspired circuit simulator</div>
+            <div class="hl-item"><div class="hl-dot google"></div><strong>Google Cirq</strong> – influenced code environment</div>
+            <div class="hl-item"><div class="hl-dot ms"></div><strong>Qiskit</strong> – full Python code execution</div>
+            <div class="hl-item"><div class="hl-dot rcas"></div><strong>RCAS Gate Viewer</strong> – visual circuit diagrams</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEGINNER -->
+    <section class="section" id="sec-beginner">
+      <div class="page-header">
+        <div><h1 class="page-title">Beginner Track</h1><p class="page-sub">Start your quantum journey — no prior knowledge required</p></div>
+        <span class="level-badge green">Beginner</span>
+      </div>
+      <div id="beginnerContent"></div>
+    </section>
+
+    <!-- INTERMEDIATE -->
+    <section class="section" id="sec-intermediate">
+      <div class="page-header">
+        <div><h1 class="page-title">Intermediate Track</h1><p class="page-sub">Quantum algorithms, circuits and programming with Qiskit</p></div>
+        <span class="level-badge blue">Intermediate</span>
+      </div>
+      <div id="intermediateContent"></div>
+    </section>
+
+    <!-- ADVANCED -->
+    <section class="section" id="sec-advanced">
+      <div class="page-header">
+        <div><h1 class="page-title">Advanced Track</h1><p class="page-sub">Quantum AI, machine learning, hybrid models and research frontiers</p></div>
+        <span class="level-badge purple">Advanced</span>
+      </div>
+      <div id="advancedContent"></div>
+    </section>
+
+    <!-- QUANTUM GATES -->
+    <section class="section" id="sec-gates">
+      <div class="page-header">
+        <div><h1 class="page-title">Quantum Gate Reference</h1><p class="page-sub">Interactive gate diagrams, matrix representations and circuit examples</p></div>
+      </div>
+      <div id="gatesContent"></div>
+    </section>
+
+    <!-- CODE LAB -->
+    <section class="section" id="sec-codelab">
+      <div class="page-header">
+        <div><h1 class="page-title">Quantum Code Lab</h1><p class="page-sub">Write, simulate and run quantum circuits — IBM Quantum &amp; Google Cirq inspired</p></div>
+        <span class="level-badge orange">Live Code</span>
+      </div>
+      <div id="codelabContent"></div>
+    </section>
+
+    <!-- FUTURE PROJECTS -->
+    <section class="section" id="sec-projects">
+      <div class="page-header">
+        <div><h1 class="page-title">Real-Time Future Projects</h1><p class="page-sub">Cutting-edge quantum AI projects for hands-on implementation</p></div>
+      </div>
+      <div id="projectsContent"></div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section class="section" id="sec-casestudies">
+      <div class="page-header">
+        <div><h1 class="page-title">Case Studies</h1><p class="page-sub">Real-world quantum computing applications and industry insights</p></div>
+      </div>
+      <div id="caseStudiesContent"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="sec-about">
+      <div class="page-header">
+        <div><h1 class="page-title">About This Platform</h1><p class="page-sub">RCAS Quantum AI Zone – Engineered for excellence</p></div>
+      </div>
+      <div id="aboutContent"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- BOTTOM OS TASKBAR -->
+<div class="os-bar">
+  <div class="os-start" onclick="toggleStart()">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7.5" height="7.5" fill="white"/><rect x="9.5" y="1" width="7.5" height="7.5" fill="white"/><rect x="1" y="9.5" width="7.5" height="7.5" fill="white"/><rect x="9.5" y="9.5" width="7.5" height="7.5" fill="white"/></svg>
+  </div>
+  <div class="os-tasks">
+    <span class="os-task active" onclick="nav(document.querySelector('[data-section=dashboard]'),'dashboard')">⚛ RCAS Portal</span>
+  </div>
+  <div class="os-sys">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M1 6l11 6L23 6"/><path d="M1 6v12l11 6 11-6V6"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    <span id="osTime">12:01</span>
+  </div>
+</div>
+
+<div class="start-menu" id="startMenu" style="display:none">
+  <div class="sm-head">RCAS Quantum AI Zone</div>
+  <div class="sm-item" onclick="nav(document.querySelector('[data-section=dashboard]'),'dashboard');toggleStart()">⊞ Dashboard</div>
+  <div class="sm-item" onclick="nav(document.querySelector('[data-section=codelab]'),'codelab');toggleStart()">⟨/⟩ Code Lab</div>
+  <div class="sm-item" onclick="nav(document.querySelector('[data-section=gates]'),'gates');toggleStart()">⊗ Gate Viewer</div>
+  <div class="sm-item" onclick="logout()">⏻ Sign Out</div>
+</div>
+
+<script src="portal.js"></script>
+<script src="portal-content.js"></script>
+</body>
+</html>
