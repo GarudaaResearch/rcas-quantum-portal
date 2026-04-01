@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RCAS – Quantum AI Zone | Login</title>
+  <meta name="description" content="RCAS Quantum AI Zone – Professional Quantum Computing & AI Teaching Platform by Prof. R. Anjit Raja"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --win-blue: #0078d4;
+      --win-blue-dark: #005a9e;
+      --win-blue-light: #deecf9;
+      --win-accent: #00b4d8;
+      --win-bg: #f3f3f3;
+      --win-white: #ffffff;
+      --win-border: #d1d1d1;
+      --win-text: #1a1a1a;
+      --win-text-muted: #605e5c;
+      --win-success: #107c10;
+      --win-error: #d13438;
+      --win-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      --win-shadow-lg: 0 20px 60px rgba(0,0,0,0.18);
+      --quantum-glow: rgba(0,120,212,0.3);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: var(--win-bg);
+      overflow: hidden;
+    }
+
+    /* ── Animated Background ── */
+    .bg-canvas {
+      position: fixed; inset: 0; z-index: 0;
+      background: linear-gradient(135deg, #e8f1fb 0%, #f0f6ff 40%, #e4f0ff 100%);
+      overflow: hidden;
+    }
+    .bg-canvas::before {
+      content: '';
+      position: absolute; inset: -50%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(0,120,212,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 70%, rgba(0,180,216,0.06) 0%, transparent 50%);
+      animation: bgFloat 12s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0% { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(20px,15px) rotate(3deg); }
+    }
+
+    /* Quantum particle dots */
+    .particle { position: absolute; border-radius: 50%; opacity: 0.15; animation: particleFloat linear infinite; }
+    .particle:nth-child(1) { width:6px;height:6px;background:#0078d4;top:15%;left:10%;animation-duration:8s; }
+    .particle:nth-child(2) { width:4px;height:4px;background:#00b4d8;top:60%;left:80%;animation-duration:11s;animation-delay:2s; }
+    .particle:nth-child(3) { width:8px;height:8px;background:#0078d4;top:80%;left:25%;animation-duration:9s;animation-delay:1s; }
+    .particle:nth-child(4) { width:5px;height:5px;background:#00b4d8;top:30%;left:65%;animation-duration:13s;animation-delay:3s; }
+    .particle:nth-child(5) { width:7px;height:7px;background:#0078d4;top:50%;left:45%;animation-duration:10s;animation-delay:0.5s; }
+    @keyframes particleFloat {
+      0% { transform: translateY(0) scale(1); opacity:0.15; }
+      50% { opacity:0.3; }
+      100% { transform: translateY(-120px) scale(1.3); opacity:0; }
+    }
+
+    /* ── Windows-style taskbar at top ── */
+    .taskbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 40px; z-index: 100;
+      background: rgba(243,243,243,0.96);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--win-border);
+      display: flex; align-items: center; padding: 0 16px;
+      gap: 12px;
+    }
+    .taskbar-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--win-text);
+    }
+    .taskbar-logo svg { flex-shrink: 0; }
+    .taskbar-time {
+      margin-left: auto; font-size: 12px; color: var(--win-text-muted); font-weight: 500;
+    }
+
+    /* ── Main Wrapper ── */
+    .login-wrapper {
+      position: relative; z-index: 10;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 60px 20px 20px;
+    }
+
+    /* ── Login Card (Windows-style window) ── */
+    .login-card {
+      width: 100%; max-width: 480px;
+      background: var(--win-white);
+      border: 1px solid var(--win-border);
+      border-radius: 8px;
+      box-shadow: var(--win-shadow-lg);
+      overflow: hidden;
+      animation: slideUp 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform: translateY(30px) scale(0.97); }
+      to   { opacity:1; transform: translateY(0) scale(1); }
+    }
+
+    /* Windows title bar */
+    .win-titlebar {
+      background: var(--win-blue);
+      padding: 8px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .win-titlebar-title {
+      font-size: 13px; font-weight: 600; color: #fff; flex: 1;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .win-controls { display: flex; gap: 4px; }
+    .win-btn {
+      width: 24px; height: 24px; border-radius: 4px; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #fff; background: rgba(255,255,255,0.2);
+      transition: background 0.15s;
+    }
+    .win-btn:hover { background: rgba(255,255,255,0.35); }
+    .win-btn.close:hover { background: #c42b1c; }
+
+    /* Card body */
+    .card-body {
+      padding: 32px 40px 28px;
+    }
+
+    .brand-header { text-align: center; margin-bottom: 28px; }
+    .brand-logo {
+      width: 72px; height: 72px; margin: 0 auto 14px;
+      background: linear-gradient(135deg, #0078d4, #00b4d8);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,120,212,0.35);
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    @keyframes logoPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(0,120,212,0.35); }
+      50% { box-shadow: 0 4px 32px rgba(0,120,212,0.6); }
+    }
+    .brand-name { font-size: 22px; font-weight: 800; color: var(--win-text); letter-spacing: -0.5px; }
+    .brand-sub { font-size: 12.5px; color: var(--win-text-muted); margin-top: 2px; }
+
+    /* Role Tabs */
+    .role-tabs {
+      display: flex; gap: 0; margin-bottom: 24px;
+      border: 1px solid var(--win-border); border-radius: 6px; overflow: hidden;
+    }
+    .role-tab {
+      flex: 1; padding: 10px; text-align: center; cursor: pointer;
+      font-size: 13px; font-weight: 600; color: var(--win-text-muted);
+      background: var(--win-bg); border: none; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .role-tab.active {
+      background: var(--win-blue); color: #fff;
+    }
+    .role-tab:first-child { border-right: 1px solid var(--win-border); }
+
+    /* Form */
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 12.5px; font-weight: 600; color: var(--win-text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .input-wrap { position: relative; }
+    .form-input {
+      width: 100%; padding: 11px 40px 11px 14px;
+      border: 1px solid var(--win-border); border-radius: 4px;
+      font-size: 14px; font-family: inherit; color: var(--win-text);
+      background: var(--win-white);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--win-blue);
+      box-shadow: 0 0 0 3px rgba(0,120,212,0.15);
+    }
+    .input-icon {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--win-text-muted);
+    }
+    .toggle-pw {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--win-text-muted);
+      padding: 2px; transition: color 0.2s;
+    }
+    .toggle-pw:hover { color: var(--win-blue); }
+
+    .error-msg {
+      background: #fde8e9; border: 1px solid #f1707a; border-radius: 4px;
+      padding: 10px 14px; font-size: 13px; color: var(--win-error);
+      margin-bottom: 16px; display: none; align-items: center; gap: 8px;
+    }
+    .error-msg.show { display: flex; }
+
+    .login-btn {
+      width: 100%; padding: 12px;
+      background: var(--win-blue); color: #fff;
+      border: none; border-radius: 4px; cursor: pointer;
+      font-size: 15px; font-weight: 600; font-family: inherit;
+      transition: background 0.2s, transform 0.1s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .login-btn:hover { background: var(--win-blue-dark); }
+    .login-btn:active { transform: scale(0.99); }
+    .login-btn.loading { opacity: 0.7; pointer-events: none; }
+
+
+
+    /* Footer inside card */
+    .card-footer {
+      background: var(--win-bg); border-top: 1px solid var(--win-border);
+      padding: 12px 40px; text-align: center;
+      font-size: 11.5px; color: var(--win-text-muted);
+    }
+    .card-footer a { color: var(--win-blue); text-decoration: none; }
+    .card-footer a:hover { text-decoration: underline; }
+
+    /* ── OS Taskbar bottom ── */
+    .os-taskbar {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 44px;
+      background: rgba(243,243,243,0.96); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--win-border);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      z-index: 100;
+    }
+    .os-icon {
+      width: 32px; height: 32px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.15s; position: relative;
+    }
+    .os-icon:hover { background: rgba(0,0,0,0.07); }
+    .os-icon.active::after {
+      content: ''; position: absolute; bottom: -4px; left: 50%;
+      transform: translateX(-50%); width: 4px; height: 4px;
+      background: var(--win-blue); border-radius: 50%;
+    }
+    .start-btn {
+      background: var(--win-blue); border-radius: 6px;
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .start-btn:hover { background: var(--win-blue-dark); }
+  </style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-canvas">
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<!-- Top Taskbar -->
+<div class="taskbar">
+  <div class="taskbar-logo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="9" stroke="#0078d4" stroke-width="2"/>
+      <circle cx="10" cy="10" r="3" fill="#0078d4"/>
+      <line x1="1" y1="10" x2="19" y2="10" stroke="#0078d4" stroke-width="1.5"/>
+      <ellipse cx="10" cy="10" rx="9" ry="4" stroke="#0078d4" stroke-width="1.2" opacity="0.5"/>
+    </svg>
+    RCAS – Quantum AI Zone
+  </div>
+  <div class="taskbar-time" id="topClock">11:51 AM</div>
+</div>
+
+<!-- Login -->
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <!-- Windows title bar -->
+    <div class="win-titlebar">
+      <div class="win-titlebar-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/>
+          <circle cx="8" cy="8" r="2.5" fill="white"/>
+          <line x1="1" y1="8" x2="15" y2="8" stroke="white" stroke-width="1.2"/>
+          <ellipse cx="8" cy="8" rx="7" ry="3.5" stroke="white" stroke-width="1" opacity="0.6"/>
+        </svg>
+        RCAS Quantum AI Zone — Secure Login
+      </div>
+      <div class="win-controls">
+        <button class="win-btn">&#8722;</button>
+        <button class="win-btn">&#9633;</button>
+        <button class="win-btn close">&#10005;</button>
+      </div>
+    </div>
+
+    <!-- Card body -->
+    <div class="card-body">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <!-- Quantum Atom SVG -->
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="5" fill="white"/>
+            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="white" stroke-width="2" fill="none"/>
+            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="white" stroke-width="2" fill="none" transform="rotate(60 20 20)"/>
+            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="white" stroke-width="2" fill="none" transform="rotate(120 20 20)"/>
+          </svg>
+        </div>
+        <div class="brand-name">RCAS – Quantum AI Zone</div>
+        <div class="brand-sub">Professional Quantum Computing &amp; AI Learning Platform</div>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs" id="roleTabs">
+        <button class="role-tab active" onclick="selectRole('admin')" id="tab-admin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          Administrator
+        </button>
+        <button class="role-tab" onclick="selectRole('user')" id="tab-user">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Student / User
+        </button>
+      </div>
+
+      <!-- Error -->
+      <div class="error-msg" id="errorMsg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errorText">Invalid credentials. Please try again.</span>
+      </div>
+
+      <!-- Form -->
+      <form id="loginForm" onsubmit="doLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Username / ID</label>
+          <div class="input-wrap">
+            <input class="form-input" id="username" type="text" placeholder="Enter your username" autocomplete="username" required/>
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrap">
+            <input class="form-input" id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required/>
+            <button type="button" class="toggle-pw" onclick="togglePw()" title="Show/Hide password">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="eyeIcon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span id="btnText">Sign In to Portal</span>
+        </button>
+      </form>
+
+
+    </div>
+
+    <div class="card-footer">
+      Prepared &amp; Engineered by <a href="https://www.linkedin.com/in/profanjitraja/" target="_blank">Prof. R. Anjit Raja</a> &nbsp;|&nbsp; &copy; 2026 RCAS – Quantum AI Zone. All rights reserved.
+    </div>
+  </div>
+</div>
+
+<!-- OS Taskbar Bottom -->
+<div class="os-taskbar">
+  <div class="start-btn">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <rect x="1" y="1" width="7.5" height="7.5" fill="white"/>
+      <rect x="9.5" y="1" width="7.5" height="7.5" fill="white"/>
+      <rect x="1" y="9.5" width="7.5" height="7.5" fill="white"/>
+      <rect x="9.5" y="9.5" width="7.5" height="7.5" fill="white"/>
+    </svg>
+  </div>
+  <div class="os-icon active">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="2" y1="12" x2="22" y2="12"/><ellipse cx="12" cy="12" rx="10" ry="4"/></svg>
+  </div>
+</div>
+
+<script>
+  let currentRole = 'admin';
+
+  function selectRole(role) {
+    currentRole = role;
+    document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + role).classList.add('active');
+    document.getElementById('errorMsg').classList.remove('show');
+  }
+
+  function togglePw() {
+    const pw = document.getElementById('password');
+    pw.type = pw.type === 'password' ? 'text' : 'password';
+  }
+
+  const CREDENTIALS = {
+    admin: { username: 'admin', password: 'RCAS@Admin2026' },
+    user:  { username: 'user',  password: 'RCAS@User2026' }
+  };
+
+  function doLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const btnText = document.getElementById('btnText');
+    btn.classList.add('loading');
+    btnText.textContent = 'Authenticating…';
+
+    setTimeout(() => {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      const cred = CREDENTIALS[currentRole];
+
+      if (user === cred.username && pass === cred.password) {
+        btnText.textContent = '✓ Access Granted! Loading Portal…';
+        sessionStorage.setItem('rcasRole', currentRole);
+        sessionStorage.setItem('rcasUser', user);
+        setTimeout(() => { window.location.href = 'portal.html'; }, 900);
+      } else {
+        btn.classList.remove('loading');
+        btnText.textContent = 'Sign In to Portal';
+        const err = document.getElementById('errorMsg');
+        document.getElementById('errorText').textContent = 'Invalid credentials. Please check username & password.';
+        err.classList.add('show');
+        document.getElementById('password').value = '';
+      }
+    }, 1200);
+  }
+
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours(), m = now.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    document.getElementById('topClock').textContent =
+      h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+  }
+  updateClock(); setInterval(updateClock, 30000);
+</script>
+</body>
+</html>
